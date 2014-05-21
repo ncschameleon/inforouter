@@ -8,6 +8,6 @@ A Ruby interface to the infoRouter SOAP API
 ## Copyright
 
 Copyright (c) 2014 NCS Software.
-See [LICENCE][] for further details.
+See [LICENSE][] for further details.
 
-[licence]: LICENCE.md
+[licence]: LICENSE.md

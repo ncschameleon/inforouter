@@ -37,8 +37,8 @@ module Inforouter
     #
     # @return [String]
     def ticket
-      get_ticket unless is_valid_ticket?(@ticket)
-      return @ticket
+      get_ticket unless valid_ticket?(@ticket)
+      @ticket
     end
 
     # Make a safe SOAP call.
@@ -71,11 +71,9 @@ module Inforouter
     end
 
     def safe(&block)
-      begin
-        yield
+      yield
       rescue Savon::SOAPFault => e
         raise Inforouter::Errors::SOAPError.new(e)
-      end
     end
 
     # Get a ticket.
@@ -95,20 +93,20 @@ module Inforouter
     #
     # @params ticket [String]
     # @return [Boolean]
-    def is_valid_ticket?(ticket)
+    def valid_ticket?(ticket)
       # isValidTicket
       result = false
       unless ticket.nil?
         message = { :authentication_ticket => ticket }
-        response = @client.call(:is_valid_ticket, :message => message)
+        response = @client.call(:valid_ticket, :message => message)
         if response.success?
-          data = response.to_array(:is_valid_ticket_response,
-                                   :is_valid_ticket_result,
+          data = response.to_array(:valid_ticket_response,
+                                   :valid_ticket_result,
                                    :response).first
           result = true if data[:@success] == 'true'
         end
       end
-      return result
+      result
     end
   end
 end

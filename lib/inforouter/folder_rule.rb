@@ -40,7 +40,7 @@ module Inforouter
           rule_item(xml, 'ClassifiedDocuments', options[:classified_documents])
         }
       end
-      return builder.doc.root.to_xml
+      builder.doc.root.to_xml
     end
 
     def self.rule_itme(xml, name, value)

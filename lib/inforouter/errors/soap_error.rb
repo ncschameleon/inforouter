@@ -11,12 +11,10 @@ module Inforouter #:nodoc:
         e.to_hash.tap do |fault|
           fault_code = fault[:fault][:faultcode]
           fault_string = parse_fault(fault[:fault][:faultstring])
-          super(
-            compose_message('soap_error',
-              :message => fault_string,
-              :code => fault_code
-            )
-          )
+          super(compose_message('soap_error',
+                                :message => fault_string,
+                                :code => fault_code
+          ))
         end
       end
 

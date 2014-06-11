@@ -16,6 +16,9 @@ Documentation:
   # don't require classes to be documented
   Enabled: false
 
+HashSyntax:
+  EnforcedStyle: hash_rockets
+
 NumericLiterals:
   # don't separate numeric literals with _
   Enabled: false

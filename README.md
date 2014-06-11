@@ -1,6 +1,6 @@
 # The infoRouter Ruby Gem
 
-[![Gem Version](http://img.shields.io/gem/v/inforouter)][gem]
+[![Gem Version](http://img.shields.io/gem/v/inforouter.svg)][gem]
 [![Build Status](http://img.shields.io/travis/ncssoftware/inforouter.svg)][travis]
 
 [gem]: https://rubygems.org/gems/inforouter

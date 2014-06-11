@@ -20,6 +20,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nokogiri', '~> 1.5.9'
   spec.add_dependency 'savon', '~> 2.4.0'
 
+  spec.add_development_dependency 'bundler', '~> 1.0'
+  spec.add_development_dependency 'rdoc', '~> 3.12'
   spec.add_development_dependency 'rainbow', '~> 1.99.2'
   spec.add_development_dependency 'rubocop', '~> 0.16.0'
  end

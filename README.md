@@ -18,6 +18,14 @@ Or install it yourself as:
 
 ## Usage
 
+Configure your environment. For example, create an initializer in Rails in <tt>config/initializers/inforouter.rb</tt>.
+
+    Inforouter.configure do |config|
+      config.host     = 'your_inforouter_host'
+      config.username = 'your_inforouter_username'
+      config.password = 'your_inforouter_password'
+    end
+
 TODO: Write usage instructions here
 
 ## Contributing

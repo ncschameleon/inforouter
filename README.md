@@ -1,5 +1,11 @@
 # The infoRouter Ruby Gem
 
+[![Gem Version](http://img.shields.io/gem/v/inforouter)][gem]
+[![Build Status](http://img.shields.io/travis/ncssoftware/inforouter.svg)][travis]
+
+[gem]: https://rubygems.org/gems/inforouter
+[travis]: https://travis-ci.org/ncssoftware/inforouter
+
 A Ruby interface to the infoRouter SOAP API
 
 ## Installation

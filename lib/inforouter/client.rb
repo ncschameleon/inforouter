@@ -8,15 +8,21 @@ module Inforouter
     # @param options [Hash]
     # @return [Inforouter::Client]
     def initialize(options = {})
+      options = {
+        :log => false,
+        :logger => Logger.new($stdout),
+        :log_level => :info
+      }.merge(options)
+
       @wsdl = options[:wsdl] || File.dirname(__FILE__) + '/../../resources/inforouter.wsdl'
 
       @client = Savon.client(
         :wsdl => @wsdl,
         :convert_request_keys_to => :camelcase,
         :pretty_print_xml => true,
-        :log => true,
-        :logger => Rails.logger,
-        :log_level => :info
+        :log => options[:log],
+        :logger => options[:logger],
+        :log_level => options[:log_level]
       )
 
       @ticket = nil

@@ -10,14 +10,16 @@ Gem::Specification.new do |spec|
   spec.email         = ["tom@ncs.co.nz"]
   spec.description   = %q(A Ruby interface to the infoRouter SOAP API.)
   spec.summary       = spec.description
-  # spec.homepage      = "http://ncssoftware.github.com/inforouter"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/ncssoftware/inforouter"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "nokogiri", "~> 1.5.9"
-  spec.add_dependency "savon", "~> 2.4.0"
+  spec.add_dependency 'nokogiri', '~> 1.5.9'
+  spec.add_dependency 'savon', '~> 2.4.0'
+
+  spec.add_development_dependency 'rainbow', '~> 1.99.2'
+  spec.add_development_dependency 'rubocop', '~> 0.16.0'
  end

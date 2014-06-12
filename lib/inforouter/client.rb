@@ -48,8 +48,12 @@ module Inforouter
     # @param message [Hash]
     def call(method, message = {})
       safe do
-        super method, :message => message.merge(authentication_params)
+        @client.call method, :message => message.merge(authentication_params)
       end
+    end
+
+    def request(method, message = {})
+      call method, message
     end
 
     private

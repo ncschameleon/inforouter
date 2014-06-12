@@ -37,7 +37,7 @@ module Inforouter
     #
     # @return [String]
     def ticket
-      get_ticket unless valid_ticket?(@ticket)
+      @ticket = authenticate_user unless valid_ticket?(@ticket)
       @ticket
     end
 
@@ -76,17 +76,19 @@ module Inforouter
         raise Inforouter::Errors::SOAPError.new(e)
     end
 
-    # Get a ticket.
-    def get_ticket
-      # AuthenticateUser
-      # Authenticates the specified user against infoRouter.
+    # Authenticate the specified user against infoRouter and returns a ticket.
+    #
+    # @return [String]
+    def authenticate_user
+      ticket = nil
       response = @client.call(:authenticate_user, :message => message_params)
       if response.success?
         data = response.to_array(:authenticate_user_response,
                                  :authenticate_user_result,
                                  :response).first
-        @ticket = data[:@ticket] if data[:@success] == 'true'
+        ticket = data[:@ticket] if data[:@success] == 'true'
       end
+      ticket
     end
 
     # Determines whether the given ticket is still valid or not.
@@ -94,14 +96,13 @@ module Inforouter
     # @params ticket [String]
     # @return [Boolean]
     def valid_ticket?(ticket)
-      # isValidTicket
       result = false
       unless ticket.nil?
         message = { :authentication_ticket => ticket }
-        response = @client.call(:valid_ticket, :message => message)
+        response = @client.call(:is_valid_ticket, :message => message)
         if response.success?
-          data = response.to_array(:valid_ticket_response,
-                                   :valid_ticket_result,
+          data = response.to_array(:is_valid_ticket_response,
+                                   :is_valid_ticket_result,
                                    :response).first
           result = true if data[:@success] == 'true'
         end

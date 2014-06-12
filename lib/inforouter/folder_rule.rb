@@ -29,7 +29,7 @@ module Inforouter
         :classified_documents => 'disallows'
       }.merge(options)
       builder = Nokogiri::XML::Builder.new do |xml|
-        xml.Rules {
+        xml.Rules do
           rule_item(xml, 'AllowableFileTypes', options[:allowable_file_types])
           rule_item(xml, 'Checkins', options[:checkins])
           rule_item(xml, 'Checkouts', options[:checkouts])
@@ -38,7 +38,7 @@ module Inforouter
           rule_item(xml, 'NewDocuments', options[:new_documents])
           rule_item(xml, 'NewFolders', options[:new_folders])
           rule_item(xml, 'ClassifiedDocuments', options[:classified_documents])
-        }
+        end
       end
       builder.doc.root.to_xml
     end

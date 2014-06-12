@@ -36,7 +36,7 @@ module Inforouter
 
     def check_configuration!
       fail Inforouter::Errors::MissingConfig.new unless self.configuration
-      self.configuration_check!
+      self.configuration.check!
     end
   end
 end

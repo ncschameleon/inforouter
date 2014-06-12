@@ -1,7 +1,7 @@
 module Inforouter
   # A <tt>Client</tt> communicates with the Inforouter service.
   class Client
-    attr_reader :client, :ticket, :wsdl
+    attr_reader :client, :ticket
 
     # Initializes a new Client object
     #
@@ -14,10 +14,8 @@ module Inforouter
         :log_level => :info
       }.merge(options)
 
-      @wsdl = options[:wsdl] || File.dirname(__FILE__) + '/../../resources/inforouter.wsdl'
-
       @client = Savon.client(
-        :wsdl => @wsdl,
+        :wsdl => Inforouter.configuration.wsdl,
         :convert_request_keys_to => :camelcase,
         :pretty_print_xml => true,
         :log => options[:log],

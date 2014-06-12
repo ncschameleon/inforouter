@@ -27,9 +27,9 @@ module Inforouter
       @client = nil
     end
 
-    def client
+    def client(options = {})
       check_configuration!
-      @client ||= Inforouter::Client.new
+      @client ||= Inforouter::Client.new(options)
     end
 
     private

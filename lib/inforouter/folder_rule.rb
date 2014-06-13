@@ -43,7 +43,7 @@ module Inforouter
       builder.doc.root.to_xml
     end
 
-    def self.rule_itme(xml, name, value)
+    def self.rule_item(xml, name, value)
       xml.Rule(:Name => name, :Value => value)
     end
   end

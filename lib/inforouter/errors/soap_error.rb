@@ -20,7 +20,8 @@ module Inforouter #:nodoc:
 
       private
 
-      # @params fault_string [String]
+      # @param fault_string [String]
+      #
       # @return [String]
       def parse_fault(fault_string)
         fault_string.lines.first.strip

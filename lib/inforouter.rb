@@ -1,4 +1,6 @@
 require 'savon'
+require 'i18n'
+require 'active_support/core_ext'
 
 require 'inforouter/access_list'
 require 'inforouter/folder_rule'

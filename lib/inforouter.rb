@@ -5,6 +5,7 @@ require 'inforouter/folder_rule'
 require 'inforouter/client'
 require 'inforouter/configuration'
 require 'inforouter/errors'
+require 'inforouter/responses'
 require 'inforouter/version'
 
 module Inforouter

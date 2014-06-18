@@ -1,5 +1,5 @@
 module Inforouter
-  # A <tt>Client</tt> communicates with the Inforouter service.
+  # A <tt>Client</tt> communicates with the infoRouter service.
   class Client
     attr_reader :client, :ticket
 

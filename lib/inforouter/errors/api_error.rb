@@ -1,7 +1,7 @@
 # encoding: utf-8
 module Inforouter #:nodoc:
   module Errors #:nodoc:
-    # This error is raised when the Inforouter service
+    # This error is raised when the infoRouter service
     # returns an error from an API.
     class ApiError < InforouterError
       # @param message [String] Error message.

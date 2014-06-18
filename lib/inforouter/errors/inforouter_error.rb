@@ -1,7 +1,7 @@
 # encoding: utf-8
 module Inforouter #:nodoc:
   module Errors #:nodoc:
-    # Default parent Inforouter error for all custom errors. This handles the
+    # Default parent infoRouter error for all custom errors. This handles the
     # base key for the translations and provides the convenience method for
     # translating the messages.
     #

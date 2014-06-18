@@ -1,13 +1,13 @@
 module Inforouter #:nodoc:
-  # Inforouter gem configuration.
+  # infoRouter gem configuration.
   class Configuration
-    # Inforouter WSDL.
+    # infoRouter WSDL.
     attr_accessor :wsdl
-    # Inforouter host.
+    # infoRouter host.
     attr_accessor :host
-    # Inforouter username.
+    # infoRouter username.
     attr_accessor :username
-    # Inforouter password.
+    # infoRouter password.
     attr_accessor :password
 
     def initialize(options = {})

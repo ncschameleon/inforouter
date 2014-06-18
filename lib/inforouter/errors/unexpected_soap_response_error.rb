@@ -1,7 +1,7 @@
 # encoding utf-8
 module Inforouter #:nodoc:
   module Errors #:nodoc:
-    # This error is raised when Inforouter returns an unexpected SOAP response.
+    # This error is raised when infoRouter returns an unexpected SOAP response.
     class UnexpectedSOAPResponse < InforouterError
       # @param raw [String] Raw data from the SOAP response.
       # @param key [String] Expected key in the SOAP response.

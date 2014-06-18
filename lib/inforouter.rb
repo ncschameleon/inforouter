@@ -10,9 +10,14 @@ require 'inforouter/errors'
 require 'inforouter/responses'
 require 'inforouter/version'
 
+I18n.load_path << File.join(File.dirname(__FILE__), 'config', 'locales', 'en.yml')
+
 module Inforouter
   class << self
     attr_accessor :configuration
+
+    # infoRouter API version.
+    API_VERSION = '8.0'
 
     # Returns true if the gem has been configured.
     def configured?

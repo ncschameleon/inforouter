@@ -1,0 +1,34 @@
+en:
+  inforouter:
+    errors:
+      messages:
+        missing_config:
+          message: "Missing configuration."
+          summary: "infoRouter requires a username and password."
+          resolution: "See your infoRouter system administrator for username and
+            password. Configure the inforouter gem. For example, add the
+            following to `config/initializers/inforouter.rb`.\n
+            \_\_Inforouter.configure do |config|\n
+            \_\_\_config.wsdl = 'your_inforouter_wsdl_location' # optional\n
+            \_\_\_config.host = 'your_inforouter_host'\n
+            \_\_\_config.username = 'your_inforouter_username'\n
+            \_\_\_config.password = 'your_inforouter_password'\n
+            \_\_end\n"
+        missing_config_option:
+          message: "Missing configuration option: %{name}."
+          summary: "A configuration option was not provided when configuration infoRouter."
+          resolution: "Review your `Inforouter.configure` code. Are you using an environment
+          variable that has not been set?"
+        soap_error:
+          message: "%{message}"
+          summary: "The server returned a %{code} error."
+          resolution: "Review the parameters passed to the request."
+        unexpected_soap_response:
+          message: "Expected a value for `%{key}` in `%{chain}` in the infoRouter response."
+          summary: "infoRouter returned an unexpected response: `%{raw}`."
+          resolution: "This is possibly a bug in the inforouter gem.\n
+          Please report it in https://github.com/ncssoftware/inforouter/issues."
+        api_error:
+          message: "%{message}"
+          summary: "The infoRouter server returned an error in the response: `%{raw}`"
+          resolution: "Check the request parameters."

@@ -13,8 +13,8 @@ module Inforouter #:nodoc:
 
       class << self
         # Location of the response in the SOAP XML.
-        def response_type(value)
-          set_dsl(:response_type, value)
+        def response_success(value)
+          set_dsl(:response_success, value)
         end
 
         # Location of the error message in the SOAP XML.
@@ -56,8 +56,15 @@ module Inforouter #:nodoc:
       end
 
       def parse!
-        # TODO
-        true
+        if self.dsl[:response_success]
+          if match(self.dsl[:response_success]) == 'true'
+            return true
+          end
+        end
+        if self.dsl[:error_message]
+          return true if match(self.dsl[:error_message]) == ''
+          # TODO
+        end
       end
     end
   end

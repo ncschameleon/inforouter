@@ -11,8 +11,8 @@ module Inforouter #:nodoc:
         # @param key [String]
         def response_key(key)
           self.key = key
-          response_type "#{key}_response/#{key}_result/response"
-          error_message "#{key}_response/#{key}_result/respone/@error"
+          response_success "#{key}_response/#{key}_result/response/@success"
+          error_message "#{key}_response/#{key}_result/response/@error"
         end
 
         # Parse an Inforouter response.

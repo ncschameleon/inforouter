@@ -18,5 +18,9 @@ module Inforouter #:nodoc:
     def enabled?
       @enabled
     end
+
+    def name
+      [@first_name, @last_name].join(' ').strip
+    end
   end
 end

@@ -5,7 +5,7 @@ module Inforouter #:nodoc:
     # User domain.
     attr_accessor :domain
     # User username.
-    attr_accessor :username
+    attr_accessor :user_name
     # User first name.
     attr_accessor :first_name
     # User last name.

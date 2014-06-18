@@ -1,6 +1,6 @@
 module Inforouter #:nodoc:
   module Responses #:nodoc:
-    # A base Inforouter SOAP response.
+    # A base infoRouter SOAP response.
     class Base
       # Raw response.
       attr_accessor :raw

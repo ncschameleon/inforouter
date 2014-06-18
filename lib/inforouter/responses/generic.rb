@@ -1,6 +1,6 @@
 module Inforouter #:nodoc:
   module Responses #:nodoc:
-    # A generic response to an Inforouter API call.
+    # A generic response to an infoRouter API call.
     class Generic < Base
       # Response key.
       class_attribute :key
@@ -15,7 +15,7 @@ module Inforouter #:nodoc:
           error_message "#{key}_response/#{key}_result/response/@error"
         end
 
-        # Parse an Inforouter response.
+        # Parse an infoRouter response.
         #
         # @param savon_response [Savon::Response]
         def parse(savon_response)

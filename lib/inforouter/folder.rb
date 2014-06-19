@@ -17,5 +17,12 @@ module Inforouter #:nodoc:
     attr_accessor :owner_name
     # Folder domain ID.
     attr_accessor :domain_id
+
+    def exists?
+      message = { :path => @path }
+      response = Inforouter.client.request :folder_exists, message
+      result = Inforouter::Responses::FolderExists.parse response
+      result[:@success] == 'true'
+    end
   end
 end

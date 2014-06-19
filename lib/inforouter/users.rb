@@ -2,6 +2,8 @@ module Inforouter #:nodoc:
   class Users
     class << self
       # All users.
+      #
+      # @return [Hash]
       def all
         @users ||= begin
           response = Inforouter.client.request :get_all_users

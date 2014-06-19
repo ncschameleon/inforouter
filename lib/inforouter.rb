@@ -2,16 +2,17 @@ require 'savon'
 require 'i18n'
 require 'active_support/core_ext'
 
-require 'inforouter/access_list'
-require 'inforouter/client'
-require 'inforouter/configuration'
+require 'inforouter/version'
 require 'inforouter/errors'
-require 'inforouter/folder_rule'
-require 'inforouter/record'
 require 'inforouter/responses'
+require 'inforouter/record'
+require 'inforouter/access_list'
+require 'inforouter/folder'
+require 'inforouter/folder_rule'
 require 'inforouter/user'
 require 'inforouter/users'
-require 'inforouter/version'
+require 'inforouter/configuration'
+require 'inforouter/client'
 
 I18n.load_path << File.join(File.dirname(__FILE__), 'config', 'locales', 'en.yml')
 

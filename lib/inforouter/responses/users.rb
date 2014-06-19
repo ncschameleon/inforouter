@@ -23,8 +23,12 @@ module Inforouter #:nodoc:
               :user_name => user[:@user_name].strip,
               :first_name => user[:@first_name].strip,
               :last_name => user[:@last_name].strip,
+              :last_login => DateTime.strptime(folder[:@last_login_date], '%Y-%m-%d %H:%M:%S'),
+              :last_password_change => DateTime.strptime(folder[:@last_password_change_date], '%Y-%m-%d %H:%M:%S'),
+              :authentication_authority => user[:@authentication_authority].strip,
+              :read_only => user[:@read_only_user] == 'TRUE'
               :email => user[:@email].strip,
-              :enabled => user[:@enabled].strip == 'TRUE'
+              :enabled => user[:@enabled] == 'TRUE'
             )
           end
         end

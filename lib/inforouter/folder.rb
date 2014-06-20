@@ -17,6 +17,8 @@ module Inforouter #:nodoc:
     attr_accessor :owner_name
     # Folder domain ID.
     attr_accessor :domain_id
+    # Folder rules.
+    attr_accessor :rules
 
     def description
       @description ||= begin
@@ -52,6 +54,20 @@ module Inforouter #:nodoc:
       }
       response = Inforouter.client.request :update_folder_properties, message
       result = Inforouter::Responses::UpdateFolderProperties.parse response
+      result[:@success] == 'true'
+    end
+
+    def update_rules(options = {})
+      options = {
+        :apply_to_tree => false
+      }.merge(options)
+      message = {
+        :path => @path,
+        'xmlRules' => @rules.to_xml,
+        :apply_to_tree => options[:apply_to_tree] ? 1 : 0
+      }
+      response = Inforouter.client.request :set_folder_rules, message
+      result = Inforouter::Responses::SetFolderRules.parse response
       result[:@success] == 'true'
     end
 

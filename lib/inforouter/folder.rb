@@ -26,6 +26,12 @@ module Inforouter #:nodoc:
       end
     end
 
+    # Setting the path also sets the name if not already set.
+    def path=(path)
+      @name ||= path.split('/').last
+      @path = path
+    end
+
     def create
       response = Inforouter.client.request :create_folder, path_params
       result = Inforouter::Responses::CreateFolder.parse response

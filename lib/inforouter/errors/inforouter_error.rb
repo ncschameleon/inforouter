@@ -51,7 +51,7 @@ module Inforouter #:nodoc:
       #
       # @return [String] The problem.
       def problem(key, attributes)
-        translate("#{key}.problem", attributes)
+        translate("#{key}.message", attributes)
       end
 
       # Create the summary.

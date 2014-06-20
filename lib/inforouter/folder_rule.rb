@@ -1,7 +1,44 @@
 require 'nokogiri'
 
 module Inforouter
-  class FolderRule
+  class FolderRule < Record
+    attr_accessor :allowable_file_types
+    attr_accessor :checkins
+    attr_accessor :checkouts
+    attr_accessor :document_deletes
+    attr_accessor :folder_deletes
+    attr_accessor :new_documents
+    attr_accessor :new_folders
+    attr_accessor :classified_documents
+
+    def checkins?
+      @checkins
+    end
+
+    def checkouts?
+      @checkouts
+    end
+
+    def document_deletes?
+      @document_deletes
+    end
+
+    def folder_deletes?
+      @folder_deletes
+    end
+
+    def new_documents?
+      @new_documents
+    end
+
+    def new_folders?
+      @new_folders
+    end
+
+    def classified_documents?
+      @classified_documents
+    end
+
     # The Rules XML fragment should be as described below.
     # The Rule item that is not specified in the xml structure will not be
     # updated.
@@ -17,34 +54,28 @@ module Inforouter
     #   <Rule Name="NewFolders" Value="disallows" />
     #   <Rule Name="ClassifiedDocuments" Value="allows" />
     # </Rules>
-    def self.rules_xml(options = {})
-      options = {
-        :allowable_file_types => nil,
-        :checkins => 'disallows',
-        :checkouts => 'disallows',
-        :document_deletes => 'disallows',
-        :folder_deletes => 'disallows',
-        :new_documents => 'disallows',
-        :new_folders => 'disallows',
-        :classified_documents => 'disallows'
-      }.merge(options)
+    def to_xml
       builder = Nokogiri::XML::Builder.new do |xml|
         xml.Rules do
-          rule_item(xml, 'AllowableFileTypes', options[:allowable_file_types])
-          rule_item(xml, 'Checkins', options[:checkins])
-          rule_item(xml, 'Checkouts', options[:checkouts])
-          rule_item(xml, 'DocumentDeletes', options[:document_deletes])
-          rule_item(xml, 'FolderDeletes', options[:folder_deletes])
-          rule_item(xml, 'NewDocuments', options[:new_documents])
-          rule_item(xml, 'NewFolders', options[:new_folders])
-          rule_item(xml, 'ClassifiedDocuments', options[:classified_documents])
+          rule_item(xml, 'AllowableFileTypes', @allowable_file_types)
+          rule_item(xml, 'Checkins', rule_value(@checkins))
+          rule_item(xml, 'Checkouts', rule_value(@checkouts))
+          rule_item(xml, 'DocumentDeletes', rule_value(@document_deletes))
+          rule_item(xml, 'FolderDeletes', rule_value(@folder_deletes))
+          rule_item(xml, 'NewDocuments', rule_value(@new_documents))
+          rule_item(xml, 'NewFolders', rule_value(@new_folders))
+          rule_item(xml, 'ClassifiedDocuments', rule_value(@classified_documents))
         end
       end
       builder.doc.root.to_xml
     end
 
-    def self.rule_item(xml, name, value)
+    def rule_item(xml, name, value)
       xml.Rule(:Name => name, :Value => value)
+    end
+
+    def rule_value(value)
+      value ? 'allows' : 'disallows'
     end
   end
 end

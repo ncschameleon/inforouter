@@ -100,6 +100,8 @@ Set the access list of a folder in the specified path.
     folder.access_list = access_list
     folder.update_access_list
 
+Right constants are defined in <tt>access_list.rb</tt>.
+
 Sets the rules of the specified folder. <tt>Inforouter::FolderRule</tt> rule items default to false and may be omitted.
 
     folder = Inforouter::Folder.new path: '/Path/To/Folder'

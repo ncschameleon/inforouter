@@ -27,12 +27,94 @@ Or install it yourself as:
 Configure your environment. For example, create an initializer in Rails in <tt>config/initializers/inforouter.rb</tt>.
 
     Inforouter.configure do |config|
+      config.wsdl     = Rails.root.join('resources', 'inforouter.wsdl')
       config.host     = 'your_inforouter_host'
       config.username = 'your_inforouter_username'
       config.password = 'your_inforouter_password'
     end
 
-TODO: Write usage instructions here
+## Using Inforouter
+
+Creating an infoRouter folder using <tt>Inforouter::Folder</tt>.
+
+    folder = Inforouter::Folder.new path: '/Path/To/Folder'
+    folder.create unless folder.exists?
+    folder.description = 'Some description'
+    folder.update_properties
+
+Make a SOAP request.
+
+    message = {
+      :path => '/Path/To/Document',
+      'withPropertySets' => 1,
+      'withSecurity' => 0,
+      'withOwner' => 0,
+      'withVersions' => 0
+    }
+    response = Inforouter.client.request :get_document, message
+
+Return all infoRouter users.
+
+    users = Inforouter::Users.all
+    users.each { |user| puts "#{user.id}\t#{user.name}" }
+
+Return the specified user.
+
+	user = Inforouter::Users['JoeD']
+	puts user.name # => 'Joe Dimaggio'
+
+Set the access list of a folder in the specified path.
+
+    folder = Inforouter::Folder.new path: '/Path/To/Folder'
+    access_list = Inforouter::AccessList.new
+    access_list.add_domain_member(
+      right: Inforouter::AccessList::READ
+    )
+    access_list.add_user_groups(
+      name: 'Authors',
+      right: Inforouter::AccessList::ADD_AND_READ
+    )
+    access_list.add_user_group(
+      name: 'Developers',
+      right: Inforouter::AccessList::CHANGE
+    )
+    access_list.add_user_group(
+      domain: 'ProjectX',
+      name: 'Architect',
+      right: Inforouter::AccessList::FULL_CONTROL
+    )
+    access_list.add_user(
+      domain: 'ProjectX',
+      name: 'JoeD',
+      right: Inforouter::AccessList::ADD_AND_READ
+    )
+    access_list.add_user(
+      domain: 'ProjectX',
+      name: 'JaneC',
+      right: Inforouter::AccessList::FULL_CONTROL
+    )
+    access_list.add_user(
+      name: 'SuzanP',
+      right: Inforouter::AccessList::FULL_CONTROL
+    )
+    folder.access_list = access_list
+    folder.update_access_list
+
+Sets the rules of the specified folder. <tt>Inforouter::FolderRule</tt> rule items default to false and may be omitted.
+
+    folder = Inforouter::Folder.new path: '/Path/To/Folder'
+    rules = Inforouter::FolderRule.new(
+              allowable_file_types: 'BMP,DOC,JPG,XLS',
+              checkins: false,
+              checkouts: false,
+              document_deletes: false,
+              folder_deletes: false,
+              new_documents: false,
+              new_folders: false,
+              classified_documents: true
+            )
+    folder.rules = rules
+    folder.update_rules
 
 ## Contributing
 

@@ -66,6 +66,7 @@ Return the specified user.
 Set the access list of a folder in the specified path.
 
     folder = Inforouter::Folder.new path: '/Path/To/Folder'
+    access_list = Inforouter::AccessList.new
     access_list.domain_members = Inforouter::AccessListDomainMembersItem.new(
       right: Inforouter::AccessList::ADD_AND_READ
     )

@@ -100,7 +100,15 @@ Set the access list of a folder in the specified path.
     folder.access_list = access_list
     folder.update_access_list
 
-Right constants are defined in <tt>access_list.rb</tt>.
+The following right constants are defined in <tt>access_list.rb</tt>.
+
+* <tt>NO_ACCESS</tt>
+* <tt>LIST</tt>
+* <tt>READ</tt>
+* <tt>ADD</tt>
+* <tt>ADD_AND_READ</tt>
+* <tt>CHANGE</tt>
+* <tt>FULL_CONTROL</tt>
 
 Sets the rules of the specified folder. <tt>Inforouter::FolderRule</tt> rule items default to false and may be omitted.
 

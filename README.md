@@ -66,34 +66,33 @@ Return the specified user.
 Set the access list of a folder in the specified path.
 
     folder = Inforouter::Folder.new path: '/Path/To/Folder'
-    access_list = Inforouter::AccessList.new
-    access_list.add_domain_member(
-      right: Inforouter::AccessList::READ
+    access_list.domain_members = Inforouter::AccessListDomainMembersItem.new(
+      right: Inforouter::AccessList::ADD_AND_READ
     )
-    access_list.add_user_groups(
+    access_list.user_groups << Inforouter::AccessListUserGroupItem.new(
       name: 'Authors',
       right: Inforouter::AccessList::ADD_AND_READ
     )
-    access_list.add_user_group(
+    access_list.user_groups << Inforouter::AccessListUserGroupItem.new(
       name: 'Developers',
       right: Inforouter::AccessList::CHANGE
     )
-    access_list.add_user_group(
+    access_list.user_groups << Inforouter::AccessListUserGroupItem.new(
       domain: 'ProjectX',
       name: 'Architect',
       right: Inforouter::AccessList::FULL_CONTROL
     )
-    access_list.add_user(
+    access_list.users << Inforouter::AccessListUserItem.new(
       domain: 'ProjectX',
       name: 'JoeD',
       right: Inforouter::AccessList::ADD_AND_READ
     )
-    access_list.add_user(
+    access_list.users << Inforouter::AccessListUserItem.new(
       domain: 'ProjectX',
       name: 'JaneC',
       right: Inforouter::AccessList::FULL_CONTROL
     )
-    access_list.add_user(
+    access_list.users << Inforouter::AccessListUserItem.new(
       name: 'SuzanP',
       right: Inforouter::AccessList::FULL_CONTROL
     )

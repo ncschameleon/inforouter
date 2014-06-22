@@ -1,5 +1,5 @@
 module Inforouter
-  class AccessList
+  class AccessList < Record
     NO_ACCESS = 0
     LIST = 1
     READ = 2
@@ -8,41 +8,19 @@ module Inforouter
     CHANGE = 5
     FULL_CONTROL = 6
 
-    def initialize
-      @domain_members = []
-      @user_groups = []
-      @users = []
-    end
+    # The <tt>Inforouter::AccessListDomainMembersItem</tt>.
+    attr_accessor :domain_members
+    # Array of <tt>Inforouter::AccessListUserGroupItem</tt>s.
+    attr_accessor :user_groups
+    # Array of <tt>Inforouter::AccessListUserItem</tt>s.
+    attr_accessor :users
 
-    def add_domain_member(options = {})
-      options = { right: NO_ACCESS }.merge(options)
-      @domain_members << { right: options[:right] }
-    end
-
-    def add_user_group(options = {})
-      options = {
-        domain: nil,
-        name: nil,
-        right: NO_ACCESS
-      }.merge(options)
-      @user_groups << {
-        domain: options[:domain],
-        name: options[:name],
-        right: options[:right]
-      }
-    end
-
-    def add_user(options = {})
-      options = {
-        domain: nil,
-        name: nil,
-        right: NO_ACCESS
-      }.merge(options)
-      @users << {
-        domain: options[:domain],
-        name: options[:name],
-        right: options[:right]
-      }
+    def initialize(params = {})
+      params = {
+        :user_groups => [],
+        :users => []
+      }.merge(params)
+      super params
     end
 
     # The AccessList XML fragment should be structures as
@@ -69,23 +47,9 @@ module Inforouter
     def to_xml
       builder = Nokogiri::XML::Builder.new do |xml|
         xml.AccessList do
-          @domain_members.each do |domain_member|
-            xml.DomainMember(:Right => domain_member[:right])
-          end
-          @user_groups.each do |user_group|
-            xml.UserGroup(
-              :Domain => user_group[:domain],
-              :GroupName => user_group[:name],
-              :Right => user_group[:right]
-            )
-          end
-          @users.each do |user|
-            xml.User(
-              :Domain => user[:domain],
-              :UserName => user[:name],
-              :Right => user[:right]
-            )
-          end
+          xml.DomainMembers(domain_members.to_hash)
+          user_groups.each { |user_group| xml.UserGroup(user_group.to_hash) }
+          users.each { |user| xml.User(user.to_hash) }
         end
       end
       builder.doc.root.to_xml

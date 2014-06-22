@@ -17,6 +17,8 @@ module Inforouter #:nodoc:
     attr_accessor :owner_name
     # Folder domain ID.
     attr_accessor :domain_id
+    # Folder access list.
+    attr_accessor :access_list
     # Folder rules.
     attr_accessor :rules
 

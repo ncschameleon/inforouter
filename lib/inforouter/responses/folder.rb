@@ -22,7 +22,7 @@ module Inforouter #:nodoc:
             :name => folder[:@name].strip,
             :path => folder[:@path].strip,
             :description => folder[:@description].strip,
-            :creation_date => DateTime.strptime(folder[:@creation_date], '%Y-%m-%d %H:%M:%S'),
+            :creation_date => parse_datetime(folder[:@creation_date]),
             :owner_name => folder[:@owner_name].strip,
             :domain_id => folder[:@domain_id].to_i
           )

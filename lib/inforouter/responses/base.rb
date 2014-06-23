@@ -53,6 +53,15 @@ module Inforouter #:nodoc:
           self.dsl[key] = value
           self.dsl
         end
+
+        # @param date [String]
+        #
+        # @return [DateTime]
+        def parse_datetime(date)
+          DateTime.strptime(date, '%Y-%m-%d %H:%M:%S')
+          rescue ArgumentError
+            nil
+        end
       end
 
       def parse!

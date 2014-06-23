@@ -18,25 +18,28 @@ module Inforouter #:nodoc:
           response = new(savon_response)
           document = response.match('get_document_response/get_document_result/response/document')
           Inforouter::Document.new(
-            :document_id => document[:@folder_id].to_i,
+            :document_id => document[:@document_id].to_i,
             :name => document[:@name].strip,
             :path => document[:@path].strip,
             :description => document[:@description].strip,
             :update_instructions => document[:@update_instructions].strip,
-            :creation_date => DateTime.strptime(document[:@creation_date], '%Y-%m-%d %H:%M:%S'),
-            :modification_date => DateTime.strptime(document[:@modification_date], '%Y-%m-%d %H:%M:%S'),
-            :checkout_date => DateTime.strptime(document[:@checkout_date], '%Y-%m-%d %H:%M:%S'),
+            :creation_date => parse_datetime(document[:@creation_date]),
+            :modification_date => parse_datetime(document[:@modification_date]),
+            :checkout_date => parse_datetime(document[:@checkout_date]),
             :checkout_by => document[:@checkout_by].strip,
             :checkout_by_user_name => document[:@checkout_by_user_name].strip,
             :size => document[:@size].to_i,
             :type => document[:@type].strip,
             :percent_complete => document[:@percent_complete].to_i,
-            :importance => document[:@importance].to_i,
-            :retention_date => DateTime.strptime(document[:@retention_date], '%Y-%m-%d %H:%M:%S'),
-            :disposition_date => DateTime.strptime(document[:@disposition_date], '%Y-%m-%d %H:%M:%S'),
+            :importance => document[:@importance].strip,
+            :retention_date => parse_datetime(document[:@retention_date]),
+            :disposition_date => parse_datetime(document[:@disposition_date]),
+            :expiration_date => parse_datetime(document[:@expiration_date]),
+            :register_date => parse_datetime(document[:@register_date]),
+            :registered_by => document[:@registered_by].strip,
             :doc_type_id => document[:@doc_type_id].to_i,
-            :doc_type_name => document[:@doc_type_id].strip,
-            :version_number => document[:@version_number].to_i
+            :doc_type_name => document[:@doc_type_name].strip,
+            :version_number => document[:@version_number].to_i,
           )
         end
       end

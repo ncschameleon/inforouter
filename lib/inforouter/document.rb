@@ -8,6 +8,8 @@ module Inforouter #:nodoc
     attr_accessor :path
     # Document description.
     attr_accessor :description
+    # Document update instructions.
+    attr_accessor :update_instructions
     # Document creation date.
     attr_accessor :creation_date
     # Document modification date.
@@ -24,10 +26,20 @@ module Inforouter #:nodoc
     attr_accessor :type
     # Document percent complete.
     attr_accessor :percent_complete
+    # Document completion date.
+    attr_accessor :completion_date
+    # Document importance.
+    attr_accessor :importance
     # Document retention date.
     attr_accessor :retention_date
     # Document disposition date.
     attr_accessor :disposition_date
+    # Document expiration date.
+    attr_accessor :expiration_date
+    # Document register date.
+    attr_accessor :register_date
+    # Document registered by.
+    attr_accessor :registered_by
     # Document doc type ID.
     attr_accessor :doc_type_id
     # Document doc type name.

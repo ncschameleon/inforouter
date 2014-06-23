@@ -1,13 +1,5 @@
 module Inforouter
   class AccessList < Record
-    NO_ACCESS = 0
-    LIST = 1
-    READ = 2
-    ADD = 3
-    ADD_AND_READ = 4
-    CHANGE = 5
-    FULL_CONTROL = 6
-
     # The <tt>Inforouter::AccessListDomainMembersItem</tt>.
     attr_accessor :domain_members
     # Array of <tt>Inforouter::AccessListUserGroupItem</tt>s.

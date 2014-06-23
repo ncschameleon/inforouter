@@ -68,39 +68,39 @@ Set the access list of a folder in the specified path.
     folder = Inforouter::Folder.new path: '/Path/To/Folder'
     access_list = Inforouter::AccessList.new
     access_list.domain_members = Inforouter::AccessListDomainMembersItem.new(
-      right: Inforouter::AccessList::ADD_AND_READ
+      right: Inforouter::Rights::ADD_AND_READ
     )
     access_list.user_groups << Inforouter::AccessListUserGroupItem.new(
       name: 'Authors',
-      right: Inforouter::AccessList::ADD_AND_READ
+      right: Inforouter::Rights::ADD_AND_READ
     )
     access_list.user_groups << Inforouter::AccessListUserGroupItem.new(
       name: 'Developers',
-      right: Inforouter::AccessList::CHANGE
+      right: Inforouter::Rights::CHANGE
     )
     access_list.user_groups << Inforouter::AccessListUserGroupItem.new(
       domain: 'ProjectX',
       name: 'Architect',
-      right: Inforouter::AccessList::FULL_CONTROL
+      right: Inforouter::Rights::FULL_CONTROL
     )
     access_list.users << Inforouter::AccessListUserItem.new(
       domain: 'ProjectX',
       name: 'JoeD',
-      right: Inforouter::AccessList::ADD_AND_READ
+      right: Inforouter::Rights::ADD_AND_READ
     )
     access_list.users << Inforouter::AccessListUserItem.new(
       domain: 'ProjectX',
       name: 'JaneC',
-      right: Inforouter::AccessList::FULL_CONTROL
+      right: Inforouter::Rights::FULL_CONTROL
     )
     access_list.users << Inforouter::AccessListUserItem.new(
       name: 'SuzanP',
-      right: Inforouter::AccessList::FULL_CONTROL
+      right: Inforouter::Rights::FULL_CONTROL
     )
     folder.access_list = access_list
     folder.update_access_list
 
-The following right constants are defined in <tt>access_list.rb</tt>.
+The following constants are defined in <tt>rights.rb</tt>.
 
 * <tt>NO_ACCESS</tt>
 * <tt>LIST</tt>

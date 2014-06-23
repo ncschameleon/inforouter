@@ -47,7 +47,7 @@ module Inforouter
     def to_xml
       builder = Nokogiri::XML::Builder.new do |xml|
         xml.AccessList do
-          xml.DomainMembers(domain_members.to_hash)
+          xml.DomainMembers(domain_members.to_hash) if domain_members
           user_groups.each { |user_group| xml.UserGroup(user_group.to_hash) }
           users.each { |user| xml.User(user.to_hash) }
         end

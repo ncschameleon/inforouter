@@ -57,9 +57,7 @@ module Inforouter #:nodoc:
 
       def parse!
         if self.dsl[:response_success]
-          if match(self.dsl[:response_success]) == 'true'
-            return true
-          end
+          return true if match(self.dsl[:response_success]) == 'true'
         end
         if self.dsl[:error_message]
           return true if match(self.dsl[:error_message]) == ''

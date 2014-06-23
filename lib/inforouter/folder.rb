@@ -36,39 +36,41 @@ module Inforouter #:nodoc:
       @path = path
     end
 
+    # @return [Boolean]
     def create
       response = Inforouter.client.request :create_folder, path_params
       result = Inforouter::Responses::CreateFolder.parse response
       result[:@success] == 'true'
     end
 
+    # @return [Boolean]
     def exists?
       response = Inforouter.client.request :folder_exists, path_params
       result = Inforouter::Responses::FolderExists.parse response
       result[:@success] == 'true'
     end
 
+    # @return [Boolean]
     def update_properties
-      message = {
-        :path => @path,
-        :new_folder_name => @name,
-        :description => @description
+      request_params = {
+        :path => path,
+        :new_folder_name => name,
+        :description => description
       }
-      response = Inforouter.client.request :update_folder_properties, message
+      response = Inforouter.client.request :update_folder_properties, request_params
       result = Inforouter::Responses::UpdateFolderProperties.parse response
       result[:@success] == 'true'
     end
 
+    # @return [Boolean]
     def update_rules(options = {})
-      options = {
-        :apply_to_tree => false
-      }.merge(options)
-      message = {
-        :path => @path,
-        'xmlRules' => @rules.to_xml,
+      options = { :apply_to_tree => false }.merge(options)
+      request_params = {
+        :path => path,
+        'xmlRules' => rules.to_xml,
         :apply_to_tree => options[:apply_to_tree] ? 1 : 0
       }
-      response = Inforouter.client.request :set_folder_rules, message
+      response = Inforouter.client.request :set_folder_rules, request_params
       result = Inforouter::Responses::SetFolderRules.parse response
       result[:@success] == 'true'
     end
@@ -78,14 +80,14 @@ module Inforouter #:nodoc:
     # @return [Hash]
     def path_params
       {
-        :path => @path
+        :path => path
       }
     end
 
     # @return [Hash]
     def folder_params
       {
-        :path => @path,
+        :path => path,
         :with_rules => 0,
         'withPropertySets' => 0,
         'withSecurity' => 0,

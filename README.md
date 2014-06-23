@@ -110,20 +110,28 @@ The following constants are defined in <tt>rights.rb</tt>.
 * <tt>CHANGE</tt>
 * <tt>FULL_CONTROL</tt>
 
-Sets the rules of the specified folder. <tt>Inforouter::FolderRule</tt> rule items default to false and may be omitted.
+Sets the rules of the specified folder.
 
     folder = Inforouter::Folder.new path: '/Path/To/Folder'
-    rules = Inforouter::FolderRule.new(
-              allowable_file_types: 'BMP,DOC,JPG,XLS',
-              checkins: false,
-              checkouts: false,
-              document_deletes: false,
-              folder_deletes: false,
-              new_documents: false,
-              new_folders: false,
-              classified_documents: true
-            )
-    folder.rules = rules
+    folder.rules = Inforouter::Rules.new(
+      allowable_file_types: 'BMP,DOC,JPG,XLS',
+      checkins: false,
+      checkouts: false,
+      document_deletes: false,
+      folder_deletes: false,
+      new_documents: false,
+      new_folders: false,
+      classified_documents: true
+    )
+    folder.update_rules
+    
+<tt>Inforouter::Rules</tt> rule items default to false and may be omitted.
+
+    folder = Inforouter::Folder.new path: '/Path/To/Folder'
+    folder.rules = Inforouter::Rules.new(
+      allowable_file_types: 'BMP,DOC,JPG,XLS',
+      classified_documents: true
+    )
     folder.update_rules
 
 ## Contributing

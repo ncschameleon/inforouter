@@ -125,7 +125,7 @@ Sets the rules of the specified folder.
     )
     folder.update_rules
     
-<tt>Inforouter::Rules</tt> rule items default to false and may be omitted.
+Boolean rule items default to false and may be omitted.
 
     folder = Inforouter::Folder.new path: '/Path/To/Folder'
     folder.rules = Inforouter::Rules.new(

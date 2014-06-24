@@ -19,8 +19,15 @@ module Inforouter #:nodoc:
     attr_accessor :domain_id
     # Folder access list.
     attr_accessor :access_list
+    # Folder property sets. Array of <tt>Inforouter::PropertySet</tt>s.
+    attr_accessor :property_sets
     # Folder rules.
     attr_accessor :rules
+
+    def initialize(params = {})
+      params = { :property_sets => [] }.merge(params)
+      super params
+    end
 
     def description
       @description ||= begin
@@ -59,6 +66,17 @@ module Inforouter #:nodoc:
       }
       response = Inforouter.client.request :update_folder_properties, request_params
       result = Inforouter::Responses::UpdateFolderProperties.parse response
+      result[:@success] == 'true'
+    end
+
+    # @return [Boolean]
+    def update_property_sets
+      request_params = {
+        :path => path,
+        'xmlpset' => PropertySet.to_xml(property_sets)
+      }
+      response = Inforouter.client.request :update_property_set_row, path_params
+      result = Inforouter::Responses::UpdatePropertySetRow response
       result[:@success] == 'true'
     end
 

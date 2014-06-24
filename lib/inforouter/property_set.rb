@@ -1,0 +1,36 @@
+module Inforouter #:nodoc:
+  class PropertySet < Record
+    # Property set name.
+    attr_accessor :name
+    # Array of <tt>Inforouter::PropertyRow</tt>s.
+    attr_accessor :rows
+
+    def initialize(params = {})
+      params = { :rows => [] }.merge(params)
+      super params
+    end
+
+    # <Propertysets>
+    #   <propertyset Name="LETTER">
+    #     <propertyrow RowNbr="1" LetterType="Business" Subject="Subject 1 - updated subject Lorem dolor sit amet.."/>
+    #     <propertyrow RowNbr="2" LetterType="Business" Subject="Subject 2 - updated subject ..Lorem Dolor Sit amet.."/>
+    #   </propertyset>
+    # </Propertysets>
+    #
+    # @return [String]
+    def self.to_xml(property_sets)
+      builder = Nokogiri::XML::Builder.new do |xml|
+        xml.Propertysets do
+          property_sets.each do |property_set|
+            xml.propertyset(:Name => property_set.name) do
+              property_set.rows.each do |row|
+                xml.propertyrow(row.to_hash)
+              end
+            end
+          end
+        end
+      end
+      builder.doc.root.to_xml
+    end
+  end
+end

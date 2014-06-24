@@ -110,6 +110,36 @@ The following constants are defined in <tt>rights.rb</tt>.
 * <tt>CHANGE</tt>
 * <tt>FULL_CONTROL</tt>
 
+Update a property set row on a folder.
+
+    class LetterRow < Inforouter::PropertyRow
+      attr_accessor :letter_type
+      attr_accessor :subject
+      
+      def to_hash
+        {
+          'RowNbr' => index + 1,
+          'LetterType' => letter_type,
+          'Subject' => subject
+        }
+      end
+    end
+
+    folder = Inforouter::Folder.new path: '/Path/To/Folder'
+    property_set = Inforouter::PropertySet.new name: 'LETTER'
+    property_set.rows << LetterRow.new(
+      index: 0,
+      letter_type: 'Business',
+      subject: 'Subject 1 - updated subject. Lorem dolor sit amet.'
+    )
+    property_set.rows << LetterRow.new(
+      index: 1,
+      letter_type: 'Business',
+      subject: 'Subject 2 - updated subject. Lorem Dolor Sit amet.'
+    )
+    folder.property_sets << property_set
+    folder.update_property_sets
+
 Sets the rules of the specified folder.
 
     folder = Inforouter::Folder.new path: '/Path/To/Folder'

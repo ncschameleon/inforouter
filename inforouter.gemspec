@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = 'inforouter'
   spec.version       = Inforouter::Version
   spec.authors       = ['Tom Fenton']
-  spec.email         = ['tom@ncs.co.nz']
+  spec.email         = ['tom.fenton@ncschameleon.co.nz']
   spec.description   = %q(A Ruby interface to the infoRouter SOAP API.)
   spec.summary       = spec.description
-  spec.homepage      = 'https://github.com/ncssoftware/inforouter'
+  spec.homepage      = 'https://github.com/ncschameleon/inforouter'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split("\n")

@@ -39,7 +39,7 @@ module Inforouter #:nodoc:
             :registered_by => document[:@registered_by].strip,
             :doc_type_id => document[:@doc_type_id].to_i,
             :doc_type_name => document[:@doc_type_name].strip,
-            :version_number => document[:@version_number].to_i,
+            :version_number => document[:@version_number].to_i
           )
         end
       end

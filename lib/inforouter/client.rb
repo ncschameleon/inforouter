@@ -18,6 +18,7 @@ module Inforouter
         :wsdl => Inforouter.configuration.wsdl,
         :convert_request_keys_to => :camelcase,
         :pretty_print_xml => true,
+        :ssl_verify_mode => :none,
         :log => options[:log],
         :logger => options[:logger],
         :log_level => options[:log_level]

@@ -62,7 +62,7 @@ module Inforouter #:nodoc:
       request_params = {
         :path => path,
         :new_folder_name => name,
-        :description => description
+        :new_description => description
       }
       response = Inforouter.client.request :update_folder_properties, request_params
       result = Inforouter::Responses::UpdateFolderProperties.parse response

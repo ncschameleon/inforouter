@@ -85,7 +85,7 @@ module Inforouter #:nodoc:
       options = { :apply_to_tree => false }.merge(options)
       request_params = {
         :path => path,
-        'xmlRules' => rules.to_xml,
+        'xmlRules' => rules.to_hash,
         :apply_to_tree => options[:apply_to_tree] ? 1 : 0
       }
       response = Inforouter.client.request :set_folder_rules, request_params

@@ -39,13 +39,27 @@ module Inforouter
     #   <Rule Name="NewFolders" Value="disallows" />
     #   <Rule Name="ClassifiedDocuments" Value="allows" />
     # </Rules>
-    def to_xml
-      builder = Nokogiri::XML::Builder.new do |xml|
-        xml.Rules do
-          rules.each { |rule| xml.Rules(rule.to_hash) }
-        end
-      end
-      builder.doc.root.to_xml
+    #
+    # Example
+    #
+    # { :rules =>
+    #   { :rule =>
+    #     [
+    #       { :@Name => "AllowableFileTypes", :@Value=>"BMP,DOC,JPG,XLS" },
+    #       { :@Name => "Checkins", :@Value=>"disallows" },
+    #       { :@Name => "Checkouts", :@Value=>"disallows" },
+    #       { :@Name => "DocumentDeletes", :@Value=>"disallows" },
+    #       { :@Name => "FolderDeletes", :@Value=>"disallows" },
+    #       { :@Name => "NewDocuments", :@Value=>"disallows" },
+    #       { :@Name => "NewFolders", :@Value=>"disallows" },
+    #       { :@Name => "ClassifiedDocuments", :@Value=>"allows" }
+    #     ]
+    #   }
+    # }
+    def to_hash
+      rules_hash = { :rule => [] }
+      rules.each { |rule| rules_hash[:rule] << rule.to_hash }
+      { :rules => rules_hash }
     end
   end
 end

@@ -8,8 +8,8 @@ module Inforouter
     # @return [Hash]
     def to_hash
       {
-        :Name => name,
-        :Value => value
+        :@Name => name,
+        :@Value => value
       }
     end
 

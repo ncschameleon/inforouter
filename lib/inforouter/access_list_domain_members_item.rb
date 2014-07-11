@@ -4,8 +4,10 @@ module Inforouter
     attr_accessor :description
 
     # Convert the object to a useable hash for SOAP requests.
+    #
+    # @return [Hash]
     def to_hash
-      { 'Right' => right }
+      { :@Right => right }
     end
   end
 end

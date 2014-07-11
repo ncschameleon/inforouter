@@ -36,15 +36,36 @@ module Inforouter
     # 4 (Add & Read)
     # 5 (Change)
     # 6 (Full Control)
-    def to_xml
-      builder = Nokogiri::XML::Builder.new do |xml|
-        xml.AccessList do
-          xml.DomainMembers(domain_members.to_hash) if domain_members
-          user_groups.each { |user_group| xml.UserGroup(user_group.to_hash) }
-          users.each { |user| xml.User(user.to_hash) }
-        end
-      end
-      builder.doc.root.to_xml
+    #
+    # Example
+    #
+    # {
+    #   :access_list => {
+    #     :domain_members => { :@Right => 2 },
+    #     :user_group => [
+    #       { :@Domain => nil, :@UserGroupName => "Authors", :@Right => 4 },
+    #       { :@Domain => nil, :@UserGroupName => "Developers", :@Right => 5 },
+    #       { :@Domain => nil, :@UserGroupName => "JoeD", :@Right => 6 }
+    #     ],
+    #     :user => [
+    #       { :@Domain => "ProjectX", :@UserName => "JoeD", :@Right => 4},
+    #       { :@Domain => "ProjectX", :@UserName => "JaneC", :@Right => 6},
+    #       { :@Domain => nil, :@UserName => "SuzanP", :@Right => 6}
+    #     ]
+    #   }
+    # }
+    #
+    # @return [Hash]
+    def to_hash
+      access_list_hash = {
+        :domain_members => nil,
+        :user_group => [],
+        :user => []
+      }
+      access_list_hash[:domain_members] = domain_members.to_hash if domain_members
+      user_groups.each { |user_group| access_list_hash[:user_group] << user_group.to_hash }
+      users.each { |user| access_list_hash[:user] << user.to_hash }
+      { :access_list => access_list_hash }
     end
   end
 end

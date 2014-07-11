@@ -45,17 +45,19 @@ module Inforouter
     # { :rules =>
     #   { :rule =>
     #     [
-    #       { :@Name => "AllowableFileTypes", :@Value=>"BMP,DOC,JPG,XLS" },
-    #       { :@Name => "Checkins", :@Value=>"disallows" },
-    #       { :@Name => "Checkouts", :@Value=>"disallows" },
-    #       { :@Name => "DocumentDeletes", :@Value=>"disallows" },
-    #       { :@Name => "FolderDeletes", :@Value=>"disallows" },
-    #       { :@Name => "NewDocuments", :@Value=>"disallows" },
-    #       { :@Name => "NewFolders", :@Value=>"disallows" },
-    #       { :@Name => "ClassifiedDocuments", :@Value=>"allows" }
+    #       { :@Name => "AllowableFileTypes", :@Value => "BMP,DOC,JPG,XLS" },
+    #       { :@Name => "Checkins", :@Value => "disallows" },
+    #       { :@Name => "Checkouts", :@Value => "disallows" },
+    #       { :@Name => "DocumentDeletes", :@Value => "disallows" },
+    #       { :@Name => "FolderDeletes", :@Value => "disallows" },
+    #       { :@Name => "NewDocuments", :@Value => "disallows" },
+    #       { :@Name => "NewFolders", :@Value => "disallows" },
+    #       { :@Name => "ClassifiedDocuments", :@Value => "allows" }
     #     ]
     #   }
     # }
+    #
+    # @return [Hash]
     def to_hash
       rules_hash = { :rule => [] }
       rules.each { |rule| rules_hash[:rule] << rule.to_hash }

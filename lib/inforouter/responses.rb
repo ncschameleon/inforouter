@@ -1,5 +1,6 @@
 require 'inforouter/responses/base'
 require 'inforouter/responses/generic'
+require 'inforouter/responses/access_list'
 require 'inforouter/responses/create_folder'
 require 'inforouter/responses/delete_folder'
 require 'inforouter/responses/document'

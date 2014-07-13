@@ -11,7 +11,7 @@ module Inforouter
     def to_hash
       {
         :@Domain => domain,
-        :@UserGroupName => name,
+        :@GroupName => name,
         :@Right => right
       }
     end

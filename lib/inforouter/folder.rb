@@ -62,7 +62,7 @@ module Inforouter #:nodoc:
       options = { :apply_to_tree => false }.merge(options)
       request_params = {
         :path => path,
-        'AccessListXML' => access_list.to_hash,
+        'AccessListXML' => access_list.to_xml,
         :apply_to_tree => options[:apply_to_tree] ? 1 : 0
       }
       response = Inforouter.client.request :set_access_list, request_params

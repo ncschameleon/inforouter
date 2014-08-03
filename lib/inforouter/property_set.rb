@@ -23,9 +23,7 @@ module Inforouter #:nodoc:
         xml.Propertysets do
           property_sets.each do |property_set|
             xml.propertyset(:Name => property_set.name) do
-              property_set.rows.each do |row|
-                xml.propertyrow(row.to_hash)
-              end
+              property_set.rows.each { |row| row.to_xml(xml) }
             end
           end
         end

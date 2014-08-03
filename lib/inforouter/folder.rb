@@ -83,6 +83,17 @@ module Inforouter #:nodoc:
     end
 
     # @return [Boolean]
+    def add_property_sets
+      request_params = {
+        :path => path,
+        'xmlpset' => PropertySet.to_xml(property_sets)
+      }
+      response = Inforouter.client.request :add_property_set_row, request_params
+      result = Inforouter::Responses::AddPropertySetRow response
+      result[:@success] == 'true'
+    end
+
+    # @return [Boolean]
     def update_property_sets
       request_params = {
         :path => path,

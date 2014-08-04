@@ -89,7 +89,7 @@ module Inforouter #:nodoc:
         'xmlpset' => PropertySet.to_xml(property_sets)
       }
       response = Inforouter.client.request :add_property_set_row, request_params
-      result = Inforouter::Responses::AddPropertySetRow response
+      result = Inforouter::Responses::AddPropertySetRow.parse response
       result[:@success] == 'true'
     end
 

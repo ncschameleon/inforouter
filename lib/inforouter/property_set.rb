@@ -6,7 +6,7 @@ module Inforouter #:nodoc:
     attr_accessor :rows
 
     def initialize(params = {})
-      params = { :rows => [] }.merge(params)
+      params = { rows: [] }.merge(params)
       super params
     end
 
@@ -22,7 +22,7 @@ module Inforouter #:nodoc:
       builder = Nokogiri::XML::Builder.new do |xml|
         xml.Propertysets do
           property_sets.each do |property_set|
-            xml.propertyset(:Name => property_set.name) do
+            xml.propertyset(Name: property_set.name) do
               property_set.rows.each { |row| row.to_xml(xml) }
             end
           end

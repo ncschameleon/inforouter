@@ -2,7 +2,7 @@ module Inforouter #:nodoc:
   # A <tt>User</tt> defines an infoRouter user.
   class User < Record
     # User ID.
-    attr_accessor :user_id
+    attr_accessor :id
     # User domain.
     attr_accessor :domain
     # User username.

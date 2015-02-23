@@ -18,17 +18,17 @@ module Inforouter #:nodoc:
           users = response.match('get_all_users_response/get_all_users_result/response/users/user')
           users.map do |user|
             Inforouter::User.new(
-              :user_id => user[:@user_id].to_i,
-              :domain => user[:@domain].strip,
-              :user_name => user[:@user_name].strip,
-              :first_name => user[:@first_name].strip,
-              :last_name => user[:@last_name].strip,
-              :last_logon => DateTime.strptime(user[:@last_logon_date], '%Y-%m-%d %H:%M:%S'),
-              :last_password_change => DateTime.strptime(user[:@last_password_change_date], '%Y-%m-%d %H:%M:%S'),
-              :authentication_authority => user[:@authentication_authority].strip,
-              :read_only => user[:@read_only_user] == 'TRUE',
-              :email => user[:@email].strip,
-              :enabled => user[:@enabled] == 'TRUE'
+              id: user[:@user_id].to_i,
+              domain: user[:@domain].strip,
+              user_name: user[:@user_name].strip,
+              first_name: user[:@first_name].strip,
+              last_name: user[:@last_name].strip,
+              last_logon: DateTime.strptime(user[:@last_logon_date], '%Y-%m-%d %H:%M:%S'),
+              last_password_change: DateTime.strptime(user[:@last_password_change_date], '%Y-%m-%d %H:%M:%S'),
+              authentication_authority: user[:@authentication_authority].strip,
+              read_only: user[:@read_only_user] == 'TRUE',
+              email: user[:@email].strip,
+              enabled: user[:@enabled] == 'TRUE'
             )
           end
         end

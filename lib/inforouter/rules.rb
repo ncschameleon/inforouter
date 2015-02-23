@@ -5,20 +5,20 @@ module Inforouter
 
     def initialize(params = {})
       params = {
-        :allowable_file_types => '',
-        :checkins => false,
-        :checkouts => false,
-        :document_deletes => false,
-        :folder_deletes => false,
-        :new_documents => false,
-        :new_folders => false,
-        :classified_documents => false
+        allowable_file_types: '',
+        checkins: false,
+        checkouts: false,
+        document_deletes: false,
+        folder_deletes: false,
+        new_documents: false,
+        new_folders: false,
+        classified_documents: false
       }.merge(params)
       @rules = []
       params.each do |key, value|
         @rules << Inforouter::RuleItem.new(
-          :name => key.to_s.camelize,
-          :value => value
+          name: key.to_s.camelize,
+          value: value
         )
       end
     end
@@ -59,9 +59,9 @@ module Inforouter
     #
     # @return [Hash]
     def to_hash
-      rules_hash = { :rule => [] }
+      rules_hash = { rule: [] }
       rules.each { |rule| rules_hash[:rule] << rule.to_hash }
-      { :rules => rules_hash }
+      { rules: rules_hash }
     end
   end
 end

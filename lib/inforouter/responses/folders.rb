@@ -18,8 +18,8 @@ module Inforouter #:nodoc:
           folders = response.match('get_folders1_response/get_folders1_result/response/f')
           folders.map do |folder|
             Inforouter::Folder.new(
-              :id => folder[:@id].to_i,
-              :name => folder[:@n].strip
+              id: folder[:@id].to_i,
+              name: folder[:@n].strip
             )
           end
         end

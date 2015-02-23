@@ -5,7 +5,7 @@ module Inforouter #:nodoc:
     class MissingConfigOption < InforouterError
       # @param name [String]
       def initialize(name)
-        super(compose_message('missing_config_option', :name => name))
+        super(compose_message('missing_config_option', name: name))
       end
     end
   end

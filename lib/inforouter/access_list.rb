@@ -9,8 +9,8 @@ module Inforouter
 
     def initialize(params = {})
       params = {
-        :user_groups => [],
-        :users => []
+        user_groups: [],
+        users: []
       }.merge(params)
       super params
     end
@@ -41,19 +41,19 @@ module Inforouter
     def to_xml
       builder = Nokogiri::XML::Builder.new do |xml|
         xml.AccessList do
-          xml.DomainMembers(:Right => domain_members.right) if domain_members
+          xml.DomainMembers(Right: domain_members.right) if domain_members
           user_groups.each do |user_group|
             xml.UserGroup(
-              :Domain    => user_group.domain,
-              :GroupName => user_group.name,
-              :Right     => user_group.right
+              Domain: user_group.domain,
+              GroupName: user_group.name,
+              Right: user_group.right
             )
           end
           users.each do |user|
             xml.User(
-              :Domain   => user.domain,
-              :UserName => user.name,
-              :Right    => user.right
+              Domain: user.domain,
+              UserName: user.name,
+              Right: user.right
             )
           end
         end

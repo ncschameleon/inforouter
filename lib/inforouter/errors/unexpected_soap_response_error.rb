@@ -8,9 +8,9 @@ module Inforouter #:nodoc:
       # @param chain [String] Complete SOAP response chain in which the key could not be found.
       def initialize(raw, key, chain)
         super(compose_message('unexpected_soap_response',
-                              :key => key,
-                              :raw => raw,
-                              :chain => chain
+                              key: key,
+                              raw: raw,
+                              chain: chain
         ))
       end
     end

@@ -31,7 +31,7 @@ module Inforouter #:nodoc:
       # message.
       #
       # @example Translate the message.
-      #   error.translate("errors", :key => value)
+      #   error.translate('errors', key: value)
       #
       # @param key [String] The key of the error in the locales.
       # @param options [Hash] The objects to pass to create the message.

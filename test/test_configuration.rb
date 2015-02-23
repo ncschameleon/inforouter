@@ -7,7 +7,7 @@ class TestConfiguration < TestSetup
 
   def test_missing_configuration
     assert_raise Inforouter::Errors::MissingConfig do
-      Inforouter.client.request :dummy, :body => {}
+      Inforouter.client.request :dummy, body: {}
     end
   end
 
@@ -16,7 +16,7 @@ class TestConfiguration < TestSetup
       config.username = 'inforouter_username'
     end
     assert_raise Inforouter::Errors::MissingConfigOption do
-      Inforouter.client.request :dummy, :body => {}
+      Inforouter.client.request :dummy, body: {}
     end
   end
 
@@ -25,7 +25,7 @@ class TestConfiguration < TestSetup
       config.host = 'inforouter_host'
     end
     assert_raise Inforouter::Errors::MissingConfigOption do
-      Inforouter.client.request :dummy, :body => {}
+      Inforouter.client.request :dummy, body: {}
     end
   end
 end

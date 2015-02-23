@@ -17,14 +17,14 @@ module Inforouter #:nodoc:
           response = new(savon_response)
           folder = response.match('get_folder_response/get_folder_result/response/folder')
           Inforouter::Folder.new(
-            :folder_id => folder[:@folder_id].to_i,
-            :parent_id => folder[:@parent_id].to_i,
-            :name => folder[:@name].strip,
-            :path => folder[:@path].strip,
-            :description => folder[:@description].strip,
-            :creation_date => parse_datetime(folder[:@creation_date]),
-            :owner_name => folder[:@owner_name].strip,
-            :domain_id => folder[:@domain_id].to_i
+            id: folder[:@folder_id].to_i,
+            parent_id: folder[:@parent_id].to_i,
+            name: folder[:@name].strip,
+            path: folder[:@path].strip,
+            description: folder[:@description].strip,
+            creation_date: parse_datetime(folder[:@creation_date]),
+            owner_name: folder[:@owner_name].strip,
+            domain_id: folder[:@domain_id].to_i
           )
         end
       end

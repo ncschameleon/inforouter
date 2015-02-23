@@ -9,19 +9,19 @@ module Inforouter
     # @return [Inforouter::Client]
     def initialize(options = {})
       options = {
-        :log => false,
-        :logger => Logger.new($stdout),
-        :log_level => :info
+        log: false,
+        logger: Logger.new($stdout),
+        log_level: :info
       }.merge(options)
 
       @client = Savon.client(
-        :wsdl => Inforouter.configuration.wsdl,
-        :convert_request_keys_to => :camelcase,
-        :pretty_print_xml => true,
-        :ssl_verify_mode => :none,
-        :log => options[:log],
-        :logger => options[:logger],
-        :log_level => options[:log_level]
+        wsdl: Inforouter.configuration.wsdl,
+        convert_request_keys_to: :camelcase,
+        pretty_print_xml: true,
+        ssl_verify_mode: :none,
+        log: options[:log],
+        logger: options[:logger],
+        log_level: options[:log_level]
       )
 
       @ticket = nil
@@ -47,7 +47,7 @@ module Inforouter
     # @param message [Hash]
     def call(method, message = {})
       safe do
-        @client.call method, :message => message.merge(authentication_params)
+        @client.call method, message: message.merge(authentication_params)
       end
     end
 
@@ -69,7 +69,7 @@ module Inforouter
     # @return [Hash]
     def authentication_params
       {
-        :authentication_ticket => ticket
+        authentication_ticket: ticket
       }
     end
 
@@ -84,7 +84,7 @@ module Inforouter
     # @return [String]
     def authenticate_user
       ticket = nil
-      response = @client.call(:authenticate_user, :message => message_params)
+      response = @client.call(:authenticate_user, message: message_params)
       if response.success?
         data = response.to_array(:authenticate_user_response,
                                  :authenticate_user_result,
@@ -101,8 +101,8 @@ module Inforouter
     def valid_ticket?(ticket)
       result = false
       unless ticket.nil?
-        message = { :authentication_ticket => ticket }
-        response = @client.call(:is_valid_ticket, :message => message)
+        message = { authentication_ticket: ticket }
+        response = @client.call(:is_valid_ticket, message: message)
         if response.success?
           data = response.to_array(:is_valid_ticket_response,
                                    :is_valid_ticket_result,

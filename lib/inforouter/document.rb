@@ -62,7 +62,7 @@ module Inforouter #:nodoc
 
     # @return [Hash]
     def path_params
-      { :path => path }
+      { path: path }
     end
   end
 end

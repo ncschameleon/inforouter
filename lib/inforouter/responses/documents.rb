@@ -18,18 +18,18 @@ module Inforouter #:nodoc:
           documents = response.match('get_documents1_response/get_documents1_result/response/d')
           documents.map do |document|
             Inforouter::Document.new(
-              :id => document[:@id].to_i,
-              :name => document[:@n].strip,
-              :modification_date => parse_datetime(document[:@mdate]),
-              :creation_date => parse_datetime(document[:@cdate]),
-              :size => document[:@size].to_i,
-              :description => document[:@dformat].strip,
-              :checkout_by_username => document[:@chkoutbyusername].strip,
-              :checkout_by_full_name => document[:@chkoutbyfullname].strip,
-              :version => document[:@version].to_i,
-              :register_date => parse_datetime(document[:@regdate]),
-              :published_version => document[:@publishedversion].to_i,
-              :type => document[:@dtype].to_i
+              id: document[:@id].to_i,
+              name: document[:@n].strip,
+              modification_date: parse_datetime(document[:@mdate]),
+              creation_date: parse_datetime(document[:@cdate]),
+              size: document[:@size].to_i,
+              description: document[:@dformat].strip,
+              checkout_by_username: document[:@chkoutbyusername].strip,
+              checkout_by_full_name: document[:@chkoutbyfullname].strip,
+              version: document[:@version].to_i,
+              register_date: parse_datetime(document[:@regdate]),
+              published_version: document[:@publishedversion].to_i,
+              type: document[:@dtype].to_i
             )
           end
         end

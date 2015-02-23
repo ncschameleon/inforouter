@@ -29,7 +29,7 @@ module Inforouter #:nodoc:
     attr_accessor :documents
 
     def initialize(params = {})
-      params = { :property_sets => [] }.merge(params)
+      params = { property_sets: [] }.merge(params)
       super params
     end
 
@@ -57,7 +57,7 @@ module Inforouter #:nodoc:
 
     def property_sets
       @property_sets ||= begin
-        response = Inforouter.client.request :get_folder, folder_params(:with_property_sets => true)
+        response = Inforouter.client.request :get_folder, folder_params(with_property_sets: true)
         folder = Inforouter::Responses::Folder.parse response
         @property_sets = folder.property_sets
       end
@@ -85,7 +85,7 @@ module Inforouter #:nodoc:
 
     # @return [Boolean]
     def update_access_list(options = {})
-      options = { :apply_to_tree => false }.merge(options)
+      options = { apply_to_tree: false }.merge(options)
       request_params = {
         :path => path,
         'AccessListXML' => access_list.to_xml,
@@ -99,9 +99,9 @@ module Inforouter #:nodoc:
     # @return [Boolean]
     def update_properties
       request_params = {
-        :path => path,
-        :new_folder_name => name,
-        :new_description => description
+        path: path,
+        new_folder_name: name,
+        new_description: description
       }
       response = Inforouter.client.request :update_folder_properties, request_params
       result = Inforouter::Responses::UpdateFolderProperties.parse response
@@ -132,7 +132,7 @@ module Inforouter #:nodoc:
 
     # @return [Boolean]
     def update_rules(options = {})
-      options = { :apply_to_tree => false }.merge(options)
+      options = { apply_to_tree: false }.merge(options)
       request_params = {
         :path => path,
         'xmlRules' => rules.to_hash,
@@ -147,12 +147,12 @@ module Inforouter #:nodoc:
 
     # @return [Hash]
     def path_params
-      { :path => path }
+      { path: path }
     end
 
     # @return [Hash]
     def folder_params(options = {})
-      options = { :with_property_sets => false }.merge(options)
+      options = { with_property_sets: false }.merge(options)
       {
         :path => path,
         :with_rules => 0,

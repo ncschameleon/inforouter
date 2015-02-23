@@ -34,7 +34,7 @@ module Inforouter
 
     # Returns true if the gem has been configured.
     def configured?
-      !!configured
+      !configured.nil?
     end
 
     # Configure the gem

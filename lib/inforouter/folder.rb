@@ -2,7 +2,7 @@ module Inforouter #:nodoc:
   # A <tt>Folder</tt> defines an infoRouter folder.
   class Folder < Record
     # Folder ID.
-    attr_accessor :folder_id
+    attr_accessor :id
     # Folder parent ID.
     attr_accessor :parent_id
     # Folder name.
@@ -23,6 +23,10 @@ module Inforouter #:nodoc:
     attr_accessor :property_sets
     # Folder rules.
     attr_accessor :rules
+    # Folder folders. Array of <tt>Inforouter::Folder</tt>s.
+    attr_accessor :folders
+    # Folder documents. Array of <tt>Inforouter::Document</tt>s.
+    attr_accessor :documents
 
     def initialize(params = {})
       params = { :property_sets => [] }.merge(params)
@@ -34,6 +38,28 @@ module Inforouter #:nodoc:
         response = Inforouter.client.request :get_folder, folder_params
         folder = Inforouter::Responses::Folder.parse response
         @description = folder.description
+      end
+    end
+
+    def documents
+      @documents ||= begin
+        response = Inforouter.client.request :get_documents1, path_params
+        @documents = Inforouter::Responses::Documents.parse response
+      end
+    end
+
+    def folders
+      @folders ||= begin
+        response = Inforouter.client.request :get_folders1, path_params
+        @folders = Inforouter::Responses::Folders.parse response
+      end
+    end
+
+    def property_sets
+      @property_sets ||= begin
+        response = Inforouter.client.request :get_folder, folder_params(:with_property_sets => true)
+        folder = Inforouter::Responses::Folder.parse response
+        @property_sets = folder.property_sets
       end
     end
 
@@ -125,11 +151,12 @@ module Inforouter #:nodoc:
     end
 
     # @return [Hash]
-    def folder_params
+    def folder_params(options = {})
+      options = { :with_property_sets => false }.merge(options)
       {
         :path => path,
         :with_rules => 0,
-        'withPropertySets' => 0,
+        'withPropertySets' => options[:with_property_sets] ? 1 : 0,
         'withSecurity' => 0,
         'withOwner' => 0
       }

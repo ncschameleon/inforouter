@@ -1,7 +1,7 @@
 module Inforouter #:nodoc
   class Document < Record
     # Document ID.
-    attr_accessor :document_id
+    attr_accessor :id
     # Document name.
     attr_accessor :name
     # Document path.
@@ -16,10 +16,10 @@ module Inforouter #:nodoc
     attr_accessor :modification_date
     # Document checkout date.
     attr_accessor :checkout_date
-    # Document checkout by.
-    attr_accessor :checkout_by
-    # Document checkout by user name.
-    attr_accessor :checkout_by_user_name
+    # Document checkout by username.
+    attr_accessor :checkout_by_username
+    # Document checkout by full name.
+    attr_accessor :checkout_by_full_name
     # Document size.
     attr_accessor :size
     # Document type.
@@ -44,8 +44,12 @@ module Inforouter #:nodoc
     attr_accessor :doc_type_id
     # Document doc type name.
     attr_accessor :doc_type_name
-    # Document version number.
-    attr_accessor :version_number
+    # Document version.
+    attr_accessor :version
+    # Document published version.
+    attr_accessor :published_version
+    # Document type.
+    attr_accessor :type
 
     # @return [Boolean]
     def exists?

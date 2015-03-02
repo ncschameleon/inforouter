@@ -58,7 +58,7 @@ module Inforouter #:nodoc:
         #
         # @return [DateTime]
         def parse_datetime(date)
-          DateTime.strptime(date, '%Y-%m-%d %H:%M:%S')
+          DateTime.strptime("#{date} #{DateTime.now.zone}", "%Y-%m-%d %H:%M:%S %Z")
           rescue ArgumentError
             nil
         end

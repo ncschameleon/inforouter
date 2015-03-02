@@ -15,8 +15,9 @@ module Inforouter #:nodoc:
         # @return [Array<Inforouter::Folder>]
         def parse(savon_response)
           response = new(savon_response)
-          folders = response.match('get_folders1_response/get_folders1_result/response/f')
-          folders.map do |folder|
+          data = response.match('get_folders1_response/get_folders1_result/response')
+          return [] if data[:@itemcount].to_i == 0
+          data[:f].map do |folder|
             Inforouter::Folder.new(
               id: folder[:@id].to_i,
               name: folder[:@n].strip

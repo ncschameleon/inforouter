@@ -15,7 +15,9 @@ module Inforouter #:nodoc:
         # @return [Inforouter::Folder]
         def parse(savon_response)
           response = new(savon_response)
-          folder = response.match('get_folder_response/get_folder_result/response/folder')
+          data = response.match('get_folder_response/get_folder_result/response')
+          return nil if data[:folder].nil?
+          folder = data[:folder]
           Inforouter::Folder.new(
             id: folder[:@folder_id].to_i,
             parent_id: folder[:@parent_id].to_i,

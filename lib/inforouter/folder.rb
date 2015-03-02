@@ -33,6 +33,13 @@ module Inforouter #:nodoc:
       super params
     end
 
+    # Find by path.
+    def self.find(options = {})
+      folder = Folder.new(options)
+      response = Inforouter.client.request :get_folder, folder.send(:folder_params)
+      Inforouter::Responses::Folder.parse response
+    end
+
     def description
       @description ||= begin
         response = Inforouter.client.request :get_folder, folder_params

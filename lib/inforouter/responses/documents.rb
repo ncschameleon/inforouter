@@ -15,8 +15,9 @@ module Inforouter #:nodoc:
         # @return [Array<Inforouter::Document>]
         def parse(savon_response)
           response = new(savon_response)
-          documents = response.match('get_documents1_response/get_documents1_result/response/d')
-          documents.map do |document|
+          data = response.match('get_documents1_response/get_documents1_result/response')
+          return [] if data[:@itemcount].to_i == 0
+          data[:d].map do |document|
             Inforouter::Document.new(
               id: document[:@id].to_i,
               name: document[:@n].strip,

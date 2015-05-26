@@ -17,6 +17,8 @@ module Inforouter #:nodoc:
           response = new(savon_response)
           data = response.match('get_folders1_response/get_folders1_result/response')
           return [] if data[:@itemcount].to_i == 0
+          # Single folder returned as a Hash.
+          data[:f] = [data[:f]] if data[:f].is_a?(Hash)
           data[:f].map do |folder|
             Inforouter::Folder.new(
               id: folder[:@id].to_i,

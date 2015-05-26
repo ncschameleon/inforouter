@@ -17,6 +17,7 @@ module Inforouter #:nodoc:
           response = new(savon_response)
           data = response.match('get_documents1_response/get_documents1_result/response')
           return [] if data[:@itemcount].to_i == 0
+          data[:d] = [data[:d]] if data[:d].is_a?(Hash)
           data[:d].map do |document|
             Inforouter::Document.new(
               id: document[:@id].to_i,

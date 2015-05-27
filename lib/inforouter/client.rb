@@ -21,7 +21,8 @@ module Inforouter
         ssl_verify_mode: :none,
         log: options[:log],
         logger: options[:logger],
-        log_level: options[:log_level]
+        log_level: options[:log_level],
+        filters: [:PWD]
       )
 
       @ticket = nil

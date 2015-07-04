@@ -28,11 +28,6 @@ module Inforouter #:nodoc:
     # Folder documents. Array of <tt>Inforouter::Document</tt>s.
     attr_accessor :documents
 
-    def initialize(params = {})
-      params = { property_sets: [] }.merge(params)
-      super params
-    end
-
     # Find by path.
     def self.find(options = {})
       folder = Folder.new(options)
@@ -115,6 +110,8 @@ module Inforouter #:nodoc:
       result[:@success] == 'true'
     end
 
+    # Property Sets.
+
     # @return [Boolean]
     def add_property_sets
       request_params = {
@@ -127,15 +124,34 @@ module Inforouter #:nodoc:
     end
 
     # @return [Boolean]
+    def delete_property_set!(name)
+      # Select property set by name.
+      property_set = @property_sets.select { |p| p.name == name }.first
+      return false unless property_set
+      request_params = {
+        :path => path,
+        'xmlpset' => property_set.delete_xml
+      }
+      response = Inforouter.client.request :delete_property_set_row, request_params
+      result = Inforouter::Responses::DeletePropertySetRow.parse response
+      if result[:@success] == 'true'
+        @property_sets.reject! { |p| p.name == name }
+      end
+      result[:@success] == 'true'
+    end
+
+    # @return [Boolean]
     def update_property_sets
       request_params = {
         :path => path,
         'xmlpset' => PropertySet.to_xml(property_sets)
       }
       response = Inforouter.client.request :update_property_set_row, request_params
-      result = Inforouter::Responses::UpdatePropertySetRow response
+      result = Inforouter::Responses::UpdatePropertySetRow.parse response
       result[:@success] == 'true'
     end
+
+    # Rules.
 
     # @return [Boolean]
     def update_rules(options = {})
@@ -159,7 +175,7 @@ module Inforouter #:nodoc:
 
     # @return [Hash]
     def folder_params(options = {})
-      options = { with_property_sets: false }.merge(options)
+      options = { with_property_sets: true }.merge(options)
       {
         :path => path,
         :with_rules => 0,

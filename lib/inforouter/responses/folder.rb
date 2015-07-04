@@ -19,6 +19,7 @@ module Inforouter #:nodoc:
           return nil if data[:folder].nil?
           folder = data[:folder]
           Inforouter::Folder.new(
+            property_sets: parse_property_sets(folder[:propertysets]),
             id: folder[:@folder_id].to_i,
             parent_id: folder[:@parent_id].to_i,
             name: folder[:@name].strip,
@@ -28,6 +29,26 @@ module Inforouter #:nodoc:
             owner_name: folder[:@owner_name].strip,
             domain_id: folder[:@domain_id].to_i
           )
+        end
+
+        private
+
+        def parse_property_sets(propertysets)
+          return [] if propertysets.nil?
+          property_sets = []
+          propertysets = [propertysets] if propertysets.is_a?(Hash)
+          propertysets.each do |propertyset|
+            propertyrows = propertyset[:propertyset][:propertyrow]
+            next if propertyrows.nil?
+            propertyrows = [propertyrows] if propertyrows.is_a?(Hash)
+            # Create a property set and add rows.
+            property_set = Inforouter::PropertySet.new name: propertyset[:propertyset][:@name]
+            propertyrows.each do |propertyrow|
+              property_set.rows << Inforouter::PropertyRow.new(propertyrow)
+            end
+            property_sets << property_set
+          end
+          property_sets
         end
       end
     end

@@ -30,5 +30,26 @@ module Inforouter #:nodoc:
       end
       builder.doc.root.to_xml
     end
+
+    # <Propertysets>
+    #   <propertyset Name="LETTER">
+    #     <propertyrow RowNbr="1"/>
+    #     <propertyrow RowNbr="3"/>
+    #   </propertyset>
+    # </Propertysets>
+    #
+    # @return [String]
+    def delete_xml
+      builder = Nokogiri::XML::Builder.new do |xml|
+        xml.Propertysets do
+          xml.propertyset(Name: @name) do
+            @rows.each do |row|
+              xml.propertyrow(RowNbr: row.row_number)
+            end
+          end
+        end
+      end
+      builder.doc.root.to_xml
+    end
   end
 end
